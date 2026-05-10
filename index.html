@@ -59,6 +59,179 @@ gtag('config', 'G-DTPGZ964FD');
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
+  /* ===== 🔧 SERVICE CATEGORY SECTION - MOBILE OPTIMIZED ===== */
+.service-categories {
+  padding: 1.5rem 0 2rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.category-section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.category-section-title {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.category-section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--primary);
+  margin: 0.4rem auto 0;
+  border-radius: 3px;
+}
+
+.category-section-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.75rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-card {
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 0.875rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 85px;
+}
+
+.category-card:hover,
+.category-card:focus {
+  border-color: var(--primary);
+  background: rgba(139, 0, 0, 0.03);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
+
+.category-card .icon {
+  font-size: 1.5rem;
+  color: var(--primary);
+  transition: var(--transition);
+  line-height: 1;
+}
+
+.category-card:hover .icon,
+.category-card:focus .icon {
+  transform: scale(1.1);
+  color: var(--primary-dark);
+}
+
+.category-card span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--secondary);
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.category-card.active {
+  border-color: var(--primary);
+  background: rgba(139, 0, 0, 0.08);
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+}
+
+.category-card.active .icon {
+  color: var(--primary-dark);
+}
+
+.category-card.active span {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Tablet - 4 columns */
+@media (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.625rem;
+  }
+  .category-card {
+    padding: 0.75rem 0.5rem;
+    min-height: 80px;
+  }
+  .category-card .icon { font-size: 1.4rem; }
+  .category-card span { font-size: 0.725rem; }
+}
+
+/* Mobile - 5 columns */
+@media (max-width: 768px) {
+  .service-categories { padding: 1.25rem 0 1.5rem; }
+  .category-section-header { margin-bottom: 1.25rem; }
+  .category-section-title { font-size: 1.4rem; }
+  .category-section-subtitle { font-size: 0.825rem; }
+  .category-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+  .category-card {
+    padding: 0.625rem 0.375rem;
+    min-height: 75px;
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+  .category-card .icon { font-size: 1.25rem; }
+  .category-card span { font-size: 0.65rem; line-height: 1.1; }
+}
+
+/* Small Mobile - 4 columns */
+@media (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
+  }
+  .category-card {
+    padding: 0.5rem 0.3125rem;
+    min-height: 70px;
+    gap: 0.375rem;
+  }
+  .category-card .icon { font-size: 1.125rem; }
+  .category-card span { font-size: 0.625rem; }
+}
+
+/* Extra Small Mobile - 3 columns */
+@media (max-width: 360px) {
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+  }
+  .category-card {
+    padding: 0.5rem 0.25rem;
+    min-height: 68px;
+  }
+  .category-card .icon { font-size: 1.1rem; }
+  .category-card span { font-size: 0.6rem; }
+}
   /* === FUTURISTIC RED HIVE PATTERN - VISIBLE & PROFESSIONAL === */
 #featured-products-section {
     background-color: #FFF2F2;
@@ -405,12 +578,145 @@ footer { background: linear-gradient(160deg, #8B1E1E 0%, #5C1212 100%); color: #
 </div>
 <div class="active-filters-wrapper" id="activeFiltersWrapper"></div>
 <div id="resultsCount" class="results-count"></div>
-
+<!-- 🔧 SERVICE CATEGORY BROWSER -->
+<section class="service-categories" aria-labelledby="categorySectionTitle">
+  <div class="container">
+    <div class="category-section-header">
+      <h2 id="categorySectionTitle" class="category-section-title">Featured Local Services</h2>
+      <p class="category-section-subtitle">
+        Browse trusted South African service professionals by category. 
+        Click any category to filter the directory below.
+      </p>
+    </div>
+    
+    <div class="category-grid" role="list">
+      <!-- All Categories (Default Active) -->
+      <button class="category-card active" 
+              data-category="all" 
+              onclick="HiveDir.setCategory('all'); syncServiceCategoryCards('all');" 
+              role="listitem" 
+              aria-pressed="true">
+        <span class="icon" aria-hidden="true">🔍</span>
+        <span>All Services</span>
+      </button>
+      
+      <!-- Digital & Tech -->
+      <button class="category-card" 
+              data-category="digital" 
+              onclick="HiveDir.setCategory('digital'); syncServiceCategoryCards('digital');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">💻</span>
+        <span>Digital & Tech</span>
+      </button>
+      
+      <!-- Catering & Events -->
+      <button class="category-card" 
+              data-category="catering" 
+              onclick="HiveDir.setCategory('catering'); syncServiceCategoryCards('catering');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🎉</span>
+        <span>Catering</span>
+      </button>
+      
+      <!-- Furniture & Home -->
+      <button class="category-card" 
+              data-category="furniture" 
+              onclick="HiveDir.setCategory('furniture'); syncServiceCategoryCards('furniture');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🛋️</span>
+        <span>Furniture</span>
+      </button>
+      
+      <!-- Automotive Services -->
+      <button class="category-card" 
+              data-category="automotive" 
+              onclick="HiveDir.setCategory('automotive'); syncServiceCategoryCards('automotive');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🚗</span>
+        <span>Automotive</span>
+      </button>
+      
+      <!-- Construction & Elevators -->
+      <button class="category-card" 
+              data-category="construction" 
+              onclick="HiveDir.setCategory('construction'); syncServiceCategoryCards('construction');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🏗️</span>
+        <span>Construction</span>
+      </button>
+      
+      <!-- Flooring Solutions -->
+      <button class="category-card" 
+              data-category="flooring" 
+              onclick="HiveDir.setCategory('flooring'); syncServiceCategoryCards('flooring');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🪵</span>
+        <span>Flooring</span>
+      </button>
+      
+      <!-- Electrical Services -->
+      <button class="category-card" 
+              data-category="electrical" 
+              onclick="HiveDir.setCategory('electrical'); syncServiceCategoryCards('electrical');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">⚡</span>
+        <span>Electrical</span>
+      </button>
+      
+      <!-- Emergency 24/7 -->
+      <button class="category-card" 
+              data-category="emergency" 
+              onclick="HiveDir.setCategory('emergency'); syncServiceCategoryCards('emergency');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🚨</span>
+        <span>Emergency</span>
+      </button>
+      
+      <!-- Logistics & Moving -->
+      <button class="category-card" 
+              data-category="logistics" 
+              onclick="HiveDir.setCategory('logistics'); syncServiceCategoryCards('logistics');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🚚</span>
+        <span>Logistics</span>
+      </button>
+      
+      <!-- Carpentry & Woodwork -->
+      <button class="category-card" 
+              data-category="carpentry" 
+              onclick="HiveDir.setCategory('carpentry'); syncServiceCategoryCards('carpentry');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">🔨</span>
+        <span>Carpentry</span>
+      </button>
+      
+      <!-- Charity & Community -->
+      <button class="category-card" 
+              data-category="charity" 
+              onclick="HiveDir.setCategory('charity'); syncServiceCategoryCards('charity');" 
+              role="listitem" 
+              aria-pressed="false">
+        <span class="icon" aria-hidden="true">❤️</span>
+        <span>Charity</span>
+      </button>
+    </div>
+  </div>
+</section>
 <main id="main-content" class="container">
   <h1 class="sr-only">Hive Times Local Services Directory - Find Trusted Professionals in South Africa</h1>
   
   <section id="services">
-    <h2 class="section-title">Featured Local Services</h2>
+    <h2 class="section-title"></h2>
     <div class="businesses-grid" id="servicesGrid">
       
       <!-- JTC Consulting -->
@@ -809,6 +1115,44 @@ fetch('slider.html').then(res => res.ok ? res.text() : Promise.reject('slider.ht
   document.getElementById('currentYear').textContent = new Date().getFullYear();
   document.getElementById('sidebarYear').textContent = new Date().getFullYear();
   applyFilters();
+  // === SERVICE CATEGORY CARD SYNC HELPER ===
+// Syncs the visual active state of category cards with HiveDir filter state
+function syncServiceCategoryCards(activeCategory) {
+  document.querySelectorAll('.category-card').forEach(card => {
+    const isActive = card.dataset.category === activeCategory;
+    card.classList.toggle('active', isActive);
+    card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+}
+
+// === ENHANCE HIVE DIR TO SYNC CATEGORY CARDS ===
+// Wrap the original setCategory to also update category card visuals
+(function enhanceHiveDirForServices() {
+  const originalSetCategory = window.HiveDir?.setCategory;
+  if (originalSetCategory) {
+    window.HiveDir.setCategory = function(value) {
+      originalSetCategory.call(this, value);
+      syncServiceCategoryCards(value);
+    };
+  }
+  
+  // Also sync on page load from URL params or default state
+  document.addEventListener('DOMContentLoaded', () => {
+    // Sync with current filter state on load
+    const currentCategory = window.state?.category || 'all';
+    syncServiceCategoryCards(currentCategory);
+  });
+})();
+
+// === OPTIONAL: Add keyboard navigation support ===
+document.querySelectorAll('.category-card').forEach(card => {
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+});
 })();
 </script>
 </body>
