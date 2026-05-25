@@ -495,83 +495,60 @@ header {
 .swiper-slide { background: var(--white); display: flex; align-items: center; justify-content: center; min-height: 250px; }
 .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ==========================================
-   🔍 UPDATED FILTER BAR - FORCES SIDE-BY-SIDE
-   ========================================== */
+/* 🔍 FILTER BAR - UPDATED TO STAY SIDE-BY-SIDE */
 .filter-bar-compact {
-    background: var(--white); 
-    border-radius: var(--radius); 
-    box-shadow: var(--shadow-sm);
-    padding: 0.6rem 0.5rem; 
-    margin: 1rem 0 1.5rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 6px;
+    background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    padding: 0.6rem 0.5rem; margin: 1rem 0 1.5rem; display: flex; align-items: center; gap: 6px;
     flex-wrap: nowrap !important; /* 🔥 Forces single row on ALL devices */
-    width: 100%;
-    box-sizing: border-box;
+    width: 100%; box-sizing: border-box;
 }
 
 /* Prevent bee icon from pushing dropdowns off-screen */
 .filter-icon {
     flex-shrink: 0;
-    width: 36px;
     display: flex;
     justify-content: center;
 }
-.filter-icon img {
-    width: 30px; 
-    height: 30px; 
-    object-fit: contain;
-    animation: float 3s ease-in-out infinite;
-}
+.filter-icon img { width: 32px; height: 32px; object-fit: contain; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
 /* Make both dropdowns share available space equally */
 .filter-dropdown {
-    position: relative; 
-    flex: 1; /* 🔥 Each takes 50% of remaining space */
+    position: relative; flex: 1;
     min-width: 0; /* 🔥 Allows shrinking below content size without wrapping */
     max-width: none; /* 🔥 Removes previous width limits */
 }
 
 /* Optimize toggle buttons for narrow screens */
 .filter-toggle {
-    width: 100%; 
-    background: var(--bg-light); 
-    border: 1.5px solid var(--border); 
-    color: var(--secondary);
-    padding: 8px 6px; /* Tighter padding */
-    border-radius: 30px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    gap: 4px; 
-    font-size: 0.8rem; /* Slightly smaller text for mobile */
-    font-weight: 500; 
-    cursor: pointer; 
-    transition: var(--transition);
-    white-space: nowrap; /* Prevents text wrapping */
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 100%; background: var(--bg-light); border: 1.5px solid var(--border); color: var(--secondary);
+    padding: 8px 6px; border-radius: 30px; display: flex; align-items: center; justify-content: space-between;
+    gap: 4px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: var(--transition);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; /* Prevents text wrapping */
 }
 
-.filter-toggle:hover, .filter-toggle.active { 
-    border-color: var(--primary); 
-    background: rgba(139, 0, 0, 0.04); 
-}
+.filter-toggle:hover, .filter-toggle.active { border-color: var(--primary); background: rgba(139, 0, 0, 0.04); }
 .filter-toggle i.fa-chevron-down { font-size: 0.65rem; flex-shrink: 0; margin-left: 2px; }
 .filter-toggle.active i.fa-chevron-down { transform: rotate(180deg); }
-
-/* Ensure dropdown menus remain readable & don't overflow mobile screens */
 .filter-menu {
-    position: absolute; top: calc(100% + 6px); left: 0; 
-    background: var(--white);
-    border-radius: 10px; box-shadow: var(--shadow-lg); 
-    min-width: 180px !important; /* Minimum width for readability */
-    max-width: 95vw; /* Prevent horizontal scrolling on tiny screens */
-    max-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px);
-    transition: all 0.25s ease; z-index: 100; border: 1px solid var(--border);
+  position: absolute; top: calc(100% + 8px); left: 0; background: var(--white);
+  border-radius: 10px; box-shadow: var(--shadow-lg); min-width: 100%; max-width: 95vw;
+  max-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px);
+  transition: all 0.25s ease; z-index: 100; border: 1px solid var(--border);
 }
+.filter-menu.show { max-height: 350px; opacity: 1; transform: translateY(0); }
+.filter-menu-header { padding: 10px 14px; font-weight: 600; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 1px solid var(--border); background: #fafbfc; }
+.filter-item { width: 100%; background: none; border: none; padding: 10px 14px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--secondary); cursor: pointer; transition: var(--transition); text-align: left; }
+.filter-item:hover { background: var(--bg-light); color: var(--primary); }
+.filter-item.active { background: rgba(139, 0, 0, 0.08); color: var(--primary); font-weight: 600; }
+.filter-item i { width: 16px; text-align: center; color: var(--primary-light); opacity: 0.9; }
+.filter-divider { height: 1px; background: var(--border); margin: 6px 0; }
+.active-filters-wrapper { min-height: 28px; margin-bottom: 0.75rem; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.filter-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--bg-light); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 4px; }
+.filter-badge button { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0 2px; font-size: 0.9rem; display: flex; }
+.filter-badge button:hover { color: #e11d48; }
+.results-count { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+
 /* 🏢 SERVICES GRID & CARDS */
 .section-title { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; color: var(--text-main); margin: 2rem 0 1.5rem; text-align: center; position: relative; }
 .section-title::after { content: ''; display: block; width: 70px; height: 4px; background: var(--primary); margin: 0.9rem auto 0; border-radius: 4px; }
@@ -884,6 +861,7 @@ JOIN THE HIVE MODAL (Mobile-Optimized)
     <div class="filter-menu" id="categoryMenu" role="menu">
       <div class="filter-menu-header">Service Category</div>
       <button class="filter-item active" data-value="all" data-label="All Categories"><i class="fas fa-th"></i> All Categories</button>
+      <button class="filter-item" data-value="health" data-label="Health"><i class="fas fa-heartbeat"></i> Health & Wellness</button>
       <button class="filter-item" data-value="digital" data-label="Digital & Tech"><i class="fas fa-laptop-code"></i> Digital & Tech</button>
       <button class="filter-item" data-value="catering" data-label="Catering & Events"><i class="fas fa-utensils"></i> Catering & Events</button>
       <button class="filter-item" data-value="furniture" data-label="Furniture & Home"><i class="fas fa-couch"></i> Furniture & Home</button>
@@ -939,14 +917,14 @@ JOIN THE HIVE MODAL (Mobile-Optimized)
         <span>All Services</span>
       </button>
 
-      <!-- Health -->
+      <!-- Health & Wellness -->
       <button class="category-card" 
               data-category="health" 
               onclick="HiveDir.setCategory('health'); syncServiceCategoryCards('health');" 
               role="listitem" 
               aria-pressed="false">
         <span class="icon" aria-hidden="true">💻</span>
-        <span>Health</span>
+        <span>Health & Wellness</span>
       </button>
       
       <!-- Digital & Tech -->
@@ -1068,15 +1046,15 @@ JOIN THE HIVE MODAL (Mobile-Optimized)
     <h2 class="section-title"></h2>
     <div class="businesses-grid" id="servicesGrid">
 
-       <!-- Nabdh by K -->
-      <article class="block" id="service-nabd-by-k" data-category="health" data-location="johannesburg">
-        <a href="http://nabdbyk.hivetimes.co.za/" target="_blank" rel="noopener"><img src="image-services/nabdbyk-logo.jpg" alt="Nabdh by K" width="400" height="300" loading="lazy"></a>
+      <!-- Nabd by K -->
+      <article class="block" id="service-nabd" data-category="health" data-location="johannesburg">
+        <a href="http://nabdbyk.hivetimes.co.za/" target="_blank" rel="noopener"><img src="image-services/nabdbyk-logo.jpg" alt="Nabd by K" width="400" height="300" loading="lazy"></a>
         <div class="info">
-          <h3>Nabdh by K</h3>
-          <p>Authentic Sunnah Cupping and Acudetox Therapy for women in Emmarentia.</p>
+          <h3>Nabd by K</h3>
+          <p>Authentic Sunnah Cupping & Acudetox Therapy for women in Emmarentia.</p>
           <div class="block-actions">
-            <a href="http://nabdbyk.hivetimes.co.za/" class="cta-btn primary"><i class="fas fa-globe"></i> Visit Website</a>
-            <a href="https://wa.me/27827702595?text=Hi!%20I'm%20enquiring%20from%20*Hive%20Times*%20about%20Nabdh%20by%20K..." class="cta-btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="http://jtc.hivetimes.co.za/" class="cta-btn primary"><i class="fas fa-globe"></i> Visit Website</a>
+            <a href="https://wa.me/27649220145?text=Hi!%20I'm%20enquiring%20from%20*Hive%20Times*%20about%20JTC%20Consulting..." class="cta-btn secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
           </div>
           <div class="share-section">
             <a href="#" class="share-btn facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -1310,7 +1288,7 @@ JOIN THE HIVE MODAL (Mobile-Optimized)
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="image-services/hive-times-logo.png" alt="Hive Times" width="100" height="100" loading="lazy">
+        <img src="image-services/hive-times-logo.jpg" alt="Hive Times" width="100" height="100" loading="lazy">
         <p>Connecting South Africans with trusted local services & professionals since 2026.</p>
         <div class="social-links">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
